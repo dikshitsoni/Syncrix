@@ -1,0 +1,6 @@
+{
+  "name": "Syncrix",
+  "description": "A clean, modern freelance CRM platform to manage contacts, deal pipelines, and analytics.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
