@@ -3,7 +3,6 @@
 [![React](https://img.shields.io/badge/React-19.0.1-61DAFB?logo=react&logoColor=white&style=flat-square)](https://react.dev)
 [![Vite](https://img.shields.io/badge/Vite-6.2.3-646CFF?logo=vite&logoColor=white&style=flat-square)](https://vite.dev)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.0-38B2AC?logo=tailwindcss&logoColor=white&style=flat-square)](https://tailwindcss.com)
-[![Software License](https://img.shields.io/badge/License-MIT-417E5A?style=flat-square)](LICENSE)
 
 **Syncrix** is a visually crafted, zero-latency CRM workspace designed specifically for freelancers, consultants, and boutique agencies. It simplifies lead nurturing, client data mapping, and pipeline value visualization into a streamlined single-page workflow—eliminating the weight and setup issues of bloated enterprise suites.
 
@@ -73,9 +72,3 @@ Take Syncrix farther with these recommended production-ready expansions:
   Connect Stripe or PayPal API webhooks to generate one-click customized HTML invoices automatically when deal cards are marked as "Contract Won."
 * **📅 Phase 3: Calendering Interfacing**
   Configure Google Calendar or Cal.com OAuth redirects inside contacts matrix pipelines so pitch calls, meeting notes, and upcoming follow-up milestones synchronize straight to your personal calendar.
-
----
-
-## 📝 License
-
-Distributed under the **MIT License**. Check out `LICENSE` for more detailed information.
