@@ -28,7 +28,7 @@ function ProtectedLayout({ children }) {
       <div className="flex-1 flex flex-col min-w-0 overflow-y-auto">
         
         {/* Top Header navbar with Mobile Menu trigger */}
-        <header className="sticky top-0 bg-accent-light/85 backdrop-blur-md border-b border-[#2E6F40]/12 h-16 flex items-center justify-between px-4 sm:px-6 z-20 shadow-xs">
+        <header className="sticky top-0 bg-[#50aa68] backdrop-blur-md border-b border-[#2E6F40]/20 h-30 flex items-center justify-between px-4 py-3 sm:px-6 z-20 shadow-xs">
           
           <div className="flex items-center gap-3">
             {/* Hamburger trigger for mobile */}
@@ -51,7 +51,7 @@ function ProtectedLayout({ children }) {
           </div>
 
           <div className="flex items-center gap-4">
-            <span className="text-xs font-semibold text-gray-400 font-sans hidden md:inline">
+            <span className="text-xs font-semibold text-white font-sans hidden md:inline">
               Sync State: <strong className="text-[#2E6F40]">● SECURE LOCAL</strong>
             </span>
             <div className="h-8 w-[1px] bg-gray-100 hidden sm:block"></div>
@@ -65,13 +65,15 @@ function ProtectedLayout({ children }) {
                 {currentUser.name ? currentUser.name.charAt(0).toUpperCase() : 'U'}
               </div>
               <div className="text-left hidden sm:block">
-                <p className="text-xs font-bold text-accent-dark leading-tight">{currentUser.name}</p>
-                <p className="text-[10px] text-gray-400 font-bold leading-none uppercase">{currentUser.email}</p>
+                <p className="text-[20px] font-bold text-accent-dark leading-tight">{currentUser.name}</p>
+                <p className="text-[9px] text-white font-bold leading-none uppercase">{currentUser.email}</p>
               </div>
             </div>
           </div>
 
         </header>
+
+
 
         {/* Content Panel Viewport */}
         <main className="flex-1">
