@@ -28,11 +28,12 @@ function ProtectedLayout({ children }) {
       {/* Primary Workspace Viewport Container */}
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden lg:pl-[80px]">
         
-        {/* Modular Header */}
-        <Header onMenuClick={() => setSidebarOpen(true)} />
-
         {/* Content Panel Viewport */}
         <main className="flex-1 overflow-y-auto">
+
+          {/* Modular Header */}
+        <Header onMenuClick={() => setSidebarOpen(true)} />
+
           {children}
         </main>
       </div>

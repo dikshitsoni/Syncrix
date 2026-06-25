@@ -214,7 +214,7 @@ export default function Deals() {
               </div>
 
               {/* Column Body Container */}
-              <div className="p-3 flex-1 space-y-3 overflow-y-auto max-h-[550px] no-scrollbar">
+              <div className="p-3 flex-1 space-y-3 overflow-y-auto max-h-[550px] scrollbar-none">
                 {colDeals.length === 0 ? (
                   <div className="py-12 text-center text-gray-400 flex flex-col items-center justify-center border-2 border-dashed border-gray-100 rounded-2xl">
                     <p className="text-[11px] font-bold">No deals here</p>
@@ -233,7 +233,7 @@ export default function Deals() {
                       draggable
                       onDragStart={(e) => handleDragStart(e, deal.id)}
                       onDragEnd={handleDragEnd}
-                      className="deal-card bg-white p-4 shadow-stat cursor-grab active:cursor-grabbing hover:shadow-md group relative transition-all duration-200 hover:-translate-y-0.5"
+                      className={`deal-card bg-white border-b p-4 shadow-stat cursor-grab active:cursor-grabbing hover:shadow-md group relative transition-all duration-200 hover:-translate-y-0.5 ${col.color}`}
                       style={{ borderRadius: '16px' }}
                     >
                       {/* Controls on Hover */}

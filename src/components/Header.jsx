@@ -9,7 +9,7 @@ export default function Header({ onMenuClick }) {
   if (!currentUser && !isDemo) return null;
 
   return (
-    <header className="sticky top-0 bg-white/30 backdrop-blur-md border-b border-white/10 h-15 flex items-center z-20 shadow-xs w-full">
+    <header className="sticky top-0 z-30 bg-white/30 backdrop-blur-md border-b border-white/20 h-15 flex items-center w-full">
       <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         <div className="flex items-center gap-3">
           {/* Hamburger trigger for mobile */}
