@@ -140,7 +140,7 @@ export default function Contacts() {
       </div>
 
       {/* Query Filter row */}
-      <div className="bg-white p-5 shadow-panel flex flex-col md:flex-row gap-3 items-center justify-between hover:scale-[1.002] transition-all duration-300" style={{ borderRadius: '24px' }}>
+      <div className="bg-white p-5 shadow-panel flex flex-col md:flex-row gap-3 items-center justify-between transition-all duration-300" style={{ borderRadius: '24px' }}>
         
         {/* Search input bar */}
         <div className="relative w-full md:max-w-md">
@@ -181,7 +181,7 @@ export default function Contacts() {
 
       {/* Main Table or Card List */}
       {filteredContacts.length === 0 ? (
-        <div className="bg-white shadow-panel p-12 text-center flex flex-col items-center justify-center min-h-[300px] hover:scale-[1.002] transition-all duration-300" style={{ borderRadius: '32px' }}>
+        <div className="bg-white shadow-panel p-12 text-center flex flex-col items-center justify-center min-h-[300px] transition-all duration-300" style={{ borderRadius: '32px' }}>
           <div className="h-14 w-14 rounded-2xl bg-primary-light text-primary flex items-center justify-center mb-4">
             <Users size={28} />
           </div>
@@ -212,7 +212,7 @@ export default function Contacts() {
           )}
         </div>
       ) : (
-        <div className="bg-white shadow-panel overflow-hidden hover:scale-[1.002] transition-all duration-300 space-y-0" style={{ borderRadius: '32px' }}>
+        <div className="bg-white shadow-panel overflow-hidden transition-all duration-300 space-y-0" style={{ borderRadius: '32px' }}>
           
           {/* Desktop Table */}
           <div className="hidden md:block overflow-x-auto">

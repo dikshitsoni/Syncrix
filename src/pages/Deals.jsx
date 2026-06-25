@@ -54,7 +54,9 @@ export default function Deals() {
 
   const handleDragOver = (e, stageKey) => {
     e.preventDefault();
-    setDraggedOverStage(stageKey);
+    if (draggedOverStage !== stageKey) {
+      setDraggedOverStage(stageKey);
+    }
   };
 
   const handleDrop = (e, targetStage) => {
@@ -66,7 +68,20 @@ export default function Deals() {
     }
   };
 
-  const handleDragLeave = () => {
+  const handleDragLeave = (e) => {
+    if (e.clientX === 0 && e.clientY === 0) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    if (
+      e.clientX < rect.left ||
+      e.clientX >= rect.right ||
+      e.clientY < rect.top ||
+      e.clientY >= rect.bottom
+    ) {
+      setDraggedOverStage(null);
+    }
+  };
+
+  const handleDragEnd = () => {
     setDraggedOverStage(null);
   };
 
@@ -148,7 +163,7 @@ export default function Deals() {
       </div>
 
       {/* Query Search */}
-      <div className="bg-white p-5 shadow-panel flex flex-col sm:flex-row gap-3 items-center hover:scale-[1.002] transition-all duration-300" style={{ borderRadius: '24px' }}>
+      <div className="bg-white p-5 shadow-panel flex flex-col sm:flex-row gap-3 items-center transition-all duration-300" style={{ borderRadius: '24px' }}>
         <div className="relative w-full sm:max-w-md">
           <input
             id="deal-search"
@@ -162,6 +177,7 @@ export default function Deals() {
         <p className="text-xs text-gray-400 font-semibold uppercase tracking-wider">
           💡 Drag cards to move stages, or click edit to update.
         </p>
+
       </div>
 
       {/* Kanban Board Row */}
@@ -178,10 +194,10 @@ export default function Deals() {
               onDragOver={(e) => handleDragOver(e, col.key)}
               onDrop={(e) => handleDrop(e, col.key)}
               onDragLeave={handleDragLeave}
-              className={`flex flex-col transition-all duration-200 min-h-[500px] shrink-0 w-full sm:w-auto
-                ${isOver 
-                  ? 'ring-2 ring-primary/40 bg-[#CFFFDC]/30 scale-[1.01]' 
-                  : 'bg-white shadow-panel'}`}
+              className={`flex flex-col transition-all duration-200 min-h-[500px] shrink-0 w-full sm:w-auto bg-white shadow-panel border-2 ${
+                isOver
+                  ? 'border-primary/30 bg-[#CFFFDC]/20' 
+                  : 'border-transparent'}`}
               style={{ borderRadius: '24px' }}
             >
               {/* Column Header */}
@@ -216,7 +232,8 @@ export default function Deals() {
                       key={deal.id}
                       draggable
                       onDragStart={(e) => handleDragStart(e, deal.id)}
-                      className="bg-white p-4 shadow-stat cursor-grab active:cursor-grabbing hover:shadow-md group relative transition-all duration-150 hover:-translate-y-0.5"
+                      onDragEnd={handleDragEnd}
+                      className="deal-card bg-white p-4 shadow-stat cursor-grab active:cursor-grabbing hover:shadow-md group relative transition-all duration-200 hover:-translate-y-0.5"
                       style={{ borderRadius: '16px' }}
                     >
                       {/* Controls on Hover */}

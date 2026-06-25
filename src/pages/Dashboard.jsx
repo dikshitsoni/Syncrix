@@ -151,7 +151,7 @@ export default function Dashboard() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
         
         {/* Metric 1: Revenue Won */}
-        <div className="bg-white p-6 rounded-3xl shadow-stat flex items-start justify-between hover:scale-[1.01] hover:shadow-md transition-all duration-300">
+        <div className="bg-white p-6 rounded-3xl shadow-stat flex items-start justify-between transition-all duration-300">
           <div className="space-y-2 font-sans">
             <p className="text-xs font-bold text-secondary uppercase tracking-wider">
               Total Revenue
@@ -170,7 +170,7 @@ export default function Dashboard() {
         </div>
 
         {/* Metric 2: Open Pipeline */}
-        <div className="bg-white p-6 rounded-3xl shadow-stat flex items-start justify-between hover:scale-[1.01] hover:shadow-md transition-all duration-300">
+        <div className="bg-white p-6 rounded-3xl shadow-stat flex items-start justify-between transition-all duration-300">
           <div className="space-y-2 font-sans">
             <p className="text-xs font-bold text-secondary uppercase tracking-wider">
               Deals Pipeline
@@ -189,7 +189,7 @@ export default function Dashboard() {
         </div>
 
         {/* Metric 3: Total Clients */}
-        <div className="bg-white p-6 rounded-3xl shadow-stat flex items-start justify-between hover:scale-[1.01] hover:shadow-md transition-all duration-300">
+        <div className="bg-white p-6 rounded-3xl shadow-stat flex items-start justify-between transition-all duration-300">
           <div className="space-y-2 font-sans">
             <p className="text-xs font-bold text-secondary uppercase tracking-wider">
               Total Contacts
@@ -207,13 +207,13 @@ export default function Dashboard() {
               </span>
             </div>
           </div>
-          <div className="p-3 bg-[#e8f6ed] text-[#429c5c] rounded-xl shrink-0">
+          <div className="p-3 bg-[#e8f6ed]/80 text-[#429c5c] rounded-xl shrink-0">
             <Users size={22} />
           </div>
         </div>
 
         {/* Metric 4: Conversion Rate */}
-        <div className="bg-white p-6 rounded-3xl shadow-stat flex items-start justify-between hover:scale-[1.01] hover:shadow-md transition-all duration-300">
+        <div className="bg-white p-6 rounded-3xl shadow-stat flex items-start justify-between transition-all duration-300">
           <div className="space-y-2 font-sans">
             <p className="text-xs font-bold text-secondary uppercase tracking-wider">
               Conversion Rate
@@ -236,7 +236,7 @@ export default function Dashboard() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         
         {/* Chart Column (2-Span) */}
-        <div className="lg:col-span-2 bg-white p-6 shadow-panel space-y-4 flex flex-col hover:scale-[1.005] transition-all duration-300" style={{ borderRadius: '32px' }}>
+        <div className="lg:col-span-2 bg-white p-6 shadow-panel space-y-4 flex flex-col transition-all duration-300" style={{ borderRadius: '32px' }}>
           <div className="flex items-center justify-between">
             <div>
               <h3 className="font-display text-base sm:text-lg font-bold text-accent-dark">
@@ -346,14 +346,14 @@ export default function Dashboard() {
             </div>
 
             {/* Simple axis label container */}
-            <div className="absolute left-0 bottom-9 text-[10px] text-gray-400 font-semibold px-1 py-0.5 bg-white/80 rounded">
+            <div className="absolute left-0 top-0 text-[10px] text-gray-400 font-semibold px-1 py-0.5 bg-white/80 rounded">
               Max: {formatCurrency(maxVal)}
             </div>
           </div>
         </div>
 
         {/* Activity Feed Column (1-Span) */}
-        <div className="bg-white p-6 shadow-panel flex flex-col justify-between hover:scale-[1.005] transition-all duration-300" style={{ borderRadius: '32px' }}>
+        <div className="bg-white p-6 shadow-panel flex flex-col justify-between transition-all duration-300" style={{ borderRadius: '32px' }}>
           <div>
             <div className="flex items-center justify-between pb-3 border-b border-gray-50">
               <h3 className="font-display text-base font-bold text-accent-dark">

@@ -4,9 +4,9 @@ const SyncrixContext = createContext(null);
 
 const DEFAULT_DEMO_USER = {
   id: 'demo-user-id',
-  name: 'Alex Rivera',
+  name: 'Demo',
   email: 'demo@syncrix.com',
-  company: 'Rivera Creative',
+  company: 'Demo Creation',
   password: 'password123',
   createdAt: '2026-01-15T08:00:00Z',
   avatarColor: '#2E6F40'
@@ -35,7 +35,7 @@ const DEFAULT_ACTIVITIES = [
   { id: 'a2', userId: 'demo-user-id', type: 'contacts', title: 'Contact Added', message: 'David Miller was added as a Lead', date: '2026-05-26T14:15:00Z' },
   { id: 'a3', userId: 'demo-user-id', type: 'deals', title: 'Deal Won 🎉', message: 'SEO Auditing Setup was marked as Won ($1,200)', date: '2026-05-25T09:00:00Z' },
   { id: 'a4', userId: 'demo-user-id', type: 'contacts', title: 'Status Closed', message: 'Alice Jenkins state changed to "Active Client"', date: '2026-05-24T16:45:00Z' },
-  { id: 'a5', userId: 'demo-user-id', type: 'deals', title: 'Proposal Sent', message: 'CRM Integration quote delivered ($12,000)', date: '2026-05-23T11:20:00Z' },
+  { id: 'a5', userId: 'demo-user-id', type: 'deals', title: 'Proposal Sent', message: 'CRM Integration quote delivered ($12,000)', date: '2026-05-23T11:20:00Z'},
 ];
 
 export function SyncrixProvider({ children }) {
@@ -46,8 +46,13 @@ export function SyncrixProvider({ children }) {
 
   const [currentUser, setCurrentUser] = useState(() => {
     const local = localStorage.getItem('syncrix_current_user');
-    return local ? JSON.parse(local) : null;
+    if (local) {
+      return JSON.parse(local);
+    }
+    return { ...DEFAULT_DEMO_USER, isDemo: true };
   });
+
+  const isDemo = !currentUser || currentUser.id === 'demo-user-id' || !!currentUser.isDemo;
 
   const [contacts, setContacts] = useState(() => {
     const local = localStorage.getItem('syncrix_contacts');
@@ -102,7 +107,16 @@ export function SyncrixProvider({ children }) {
     const trimmedEmail = email.trim().toLowerCase();
     const user = users.find(u => u.email.trim().toLowerCase() === trimmedEmail && u.password === password);
     if (user) {
-      setCurrentUser(user);
+      if (isDemo && user.id !== 'demo-user-id') {
+        setContacts(prev => prev.filter(c => c.userId !== 'demo-user-id'));
+        setDeals(prev => prev.filter(d => d.userId !== 'demo-user-id'));
+        setActivities(prev => prev.filter(a => a.userId !== 'demo-user-id'));
+      }
+      
+      const authenticatedUser = { ...user };
+      delete authenticatedUser.isDemo;
+
+      setCurrentUser(authenticatedUser);
       addActivityLog(user.id, 'auth', 'Logged In', 'Welcome back to Syncrix!');
       return { success: true };
     }
@@ -125,6 +139,12 @@ export function SyncrixProvider({ children }) {
       avatarColor: ['#2E6F40', '#68BA7F', '#253D2C', '#3b82f6', '#ec4899', '#8b5cf6'][Math.floor(Math.random() * 6)]
     };
 
+    if (isDemo) {
+      setContacts(prev => prev.filter(c => c.userId !== 'demo-user-id'));
+      setDeals(prev => prev.filter(d => d.userId !== 'demo-user-id'));
+      setActivities(prev => prev.filter(a => a.userId !== 'demo-user-id'));
+    }
+
     setUsers(prev => [...prev, newUser]);
     setCurrentUser(newUser);
 
@@ -138,10 +158,25 @@ export function SyncrixProvider({ children }) {
   };
 
   const logout = () => {
-    if (currentUser) {
+    if (currentUser && !currentUser.isDemo) {
       addActivityLog(currentUser.id, 'auth', 'Logged Out', 'You have been logged out of the session.');
     }
-    setCurrentUser(null);
+    localStorage.removeItem('syncrix_current_user');
+    setCurrentUser({ ...DEFAULT_DEMO_USER, isDemo: true });
+
+    // Restore demo datasets
+    setContacts(prev => {
+      const clean = prev.filter(c => c.userId !== 'demo-user-id');
+      return [...clean, ...DEFAULT_CONTACTS];
+    });
+    setDeals(prev => {
+      const clean = prev.filter(d => d.userId !== 'demo-user-id');
+      return [...clean, ...DEFAULT_DEALS];
+    });
+    setActivities(prev => {
+      const clean = prev.filter(a => a.userId !== 'demo-user-id');
+      return [...clean, ...DEFAULT_ACTIVITIES];
+    });
   };
 
   const updateUserProfile = (profileData) => {
@@ -245,6 +280,7 @@ export function SyncrixProvider({ children }) {
   return (
     <SyncrixContext.Provider value={{
       currentUser,
+      isDemo,
       login,
       signup,
       logout,

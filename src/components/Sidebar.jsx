@@ -18,7 +18,7 @@ import { useSyncrix } from '../context/SyncrixContext';
 export default function Sidebar({ isOpen, setIsOpen }) {
   const { currentUser, logout } = useSyncrix();
   const navigate = useNavigate();
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(true);
 
   const navigationItems = [
     { name: 'Dashboard', path: '/', icon: LayoutDashboard },
@@ -51,11 +51,27 @@ export default function Sidebar({ isOpen, setIsOpen }) {
         />
       )}
 
+      {/* Desktop Backdrop Blur */}
+      {!isCollapsed && (
+        <div 
+          className="hidden lg:block"
+          style={{ 
+            position: 'fixed', 
+            inset: 0, 
+            background: 'rgba(255, 255, 255, 0.1)', 
+            backdropFilter: 'blur(12px)', 
+            WebkitBackdropFilter: 'blur(12px)', 
+            zIndex: 40 
+          }}
+          onClick={() => setIsCollapsed(true)}
+        />
+      )}
+
       {/* Sidebar Root */}
       <aside 
         id="sidebar"
-        className={`fixed inset-y-0 left-0 bg-primary z-40 flex flex-col justify-between border-r border-white/10 transition-all duration-300 transform 
-          lg:static lg:translate-x-0 ${isOpen ? 'translate-x-0' : '-translate-x-full'} 
+        className={`fixed inset-y-0 left-0 bg-primary z-50 flex flex-col justify-between border-r border-white/10 transition-all duration-300 transform 
+          lg:fixed lg:translate-x-0 ${isOpen ? 'translate-x-0' : '-translate-x-full'} 
           ${isCollapsed ? 'lg:w-[80px]' : 'lg:w-[260px]'} w-[260px]`}
       >
         {/* Top Header section */}
@@ -117,7 +133,10 @@ export default function Sidebar({ isOpen, setIsOpen }) {
                 id={`nav-${item.name.toLowerCase().replace(' ', '-')}`}
                 key={item.name}
                 to={item.path}
-                onClick={() => setIsOpen(false)}
+                onClick={() => {
+                  setIsOpen(false);
+                  setIsCollapsed(true);
+                }}
                 className={({ isActive }) => menuClass(isActive)}
                 title={isCollapsed ? item.name : undefined}
               >
